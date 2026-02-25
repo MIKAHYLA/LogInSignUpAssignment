@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dark Auth System</title>
+<title>Welcome to IT World</title>
 
 <style>
 *{
@@ -13,38 +13,49 @@
 }
 
 body{
-    background: linear-gradient(135deg, #141e30, #243b55);
     height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
+    background: radial-gradient(circle at top, #1a001f, #0f0014, #000000);
 }
 
 .container{
-    width:380px;
-    background: rgba(25, 25, 35, 0.95);
-    padding:35px;
-    border-radius:16px;
-    box-shadow:0 15px 40px rgba(0,0,0,0.6);
-    border:1px solid rgba(255,255,255,0.05);
+    width:100%;
+    max-width:360px;
+    padding:30px;
+    border-radius:20px;
+    background: rgba(20, 0, 25, 0.95);
+    box-shadow:
+        0 0 25px rgba(255, 20, 147, 0.4),
+        0 0 60px rgba(255, 20, 147, 0.2);
+    border:1px solid rgba(255,105,180,0.3);
+}
+
+.app-title{
+    text-align:center;
+    font-size:20px;
+    font-weight:600;
+    margin-bottom:20px;
+    color:#ff4da6;
+    text-shadow:0 0 15px rgba(255, 77, 166, 0.7);
 }
 
 h2{
     text-align:center;
-    margin-bottom:25px;
-    color:#ffffff;
-    font-weight:600;
+    margin-bottom:20px;
+    color:white;
 }
 
 input{
     width:100%;
-    padding:13px;
-    margin:10px 0;
-    border:1px solid rgba(255,255,255,0.1);
-    border-radius:10px;
-    background:#1f1f2e;
+    padding:14px;
+    margin:8px 0;
+    border-radius:12px;
+    border:1px solid rgba(255,105,180,0.3);
+    background:#140017;
     color:white;
-    transition:0.3s ease;
+    transition:0.3s;
 }
 
 input::placeholder{
@@ -53,48 +64,47 @@ input::placeholder{
 
 input:focus{
     outline:none;
-    border-color:#8b5cf6;
-    box-shadow:0 0 8px rgba(139,92,246,0.6);
+    border-color:#ff4da6;
+    box-shadow:0 0 10px rgba(255,77,166,0.6);
 }
 
 button{
     width:100%;
-    padding:13px;
+    padding:14px;
     margin-top:12px;
     border:none;
-    border-radius:10px;
-    cursor:pointer;
+    border-radius:12px;
     font-weight:600;
-    background: linear-gradient(90deg, #8b5cf6, #6366f1);
+    cursor:pointer;
+    background: linear-gradient(90deg, #ff1493, #ff4da6);
     color:white;
-    transition:0.3s ease;
+    transition:0.3s;
 }
 
 button:hover{
+    box-shadow:0 0 20px rgba(255,20,147,0.8);
     transform:translateY(-2px);
-    box-shadow:0 8px 20px rgba(139,92,246,0.5);
 }
 
 .google{
     background:white;
     color:#111;
-    margin-top:10px;
 }
 
 .google:hover{
-    background:#e5e5e5;
+    box-shadow:0 0 15px rgba(255,255,255,0.6);
 }
 
 .link{
     text-align:center;
-    margin-top:18px;
+    margin-top:15px;
     font-size:14px;
+    color:#ff99cc;
     cursor:pointer;
-    color:#cbd5e1;
 }
 
 .link:hover{
-    color:#8b5cf6;
+    text-decoration:underline;
 }
 
 .dashboard{
@@ -104,7 +114,7 @@ button:hover{
 
 .dashboard p{
     margin:15px 0;
-    color:#cbd5e1;
+    color:#ff99cc;
 }
 
 .hidden{
@@ -117,7 +127,8 @@ button:hover{
 
 <div class="container">
 
-    <!-- SIGN UP -->
+    <div class="app-title">Welcome to IT World</div>
+
     <div id="signupDiv">
         <h2>Create Account</h2>
         <input type="text" id="signupFirstName" placeholder="First Name">
@@ -129,7 +140,6 @@ button:hover{
         <div class="link" onclick="showLogin()">Already have an account? Log In</div>
     </div>
 
-    <!-- LOGIN -->
     <div id="loginDiv" class="hidden">
         <h2>Login</h2>
         <input type="email" id="loginEmail" placeholder="Email">
@@ -140,7 +150,6 @@ button:hover{
         <div class="link" onclick="showSignup()">Don't have an account? Sign Up</div>
     </div>
 
-    <!-- DASHBOARD -->
     <div id="dashboard" class="hidden dashboard">
         <h2>Welcome</h2>
         <p id="userEmail"></p>
@@ -164,19 +173,18 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCE4WOqqapSFvoif_K7euTH7GIidzUq3Fg",
-    authDomain: "authsystemassignment.firebaseapp.com",
-    projectId: "authsystemassignment",
-    storageBucket: "authsystemassignment.firebasestorage.app",
-    messagingSenderId: "696784203952",
-    appId: "1:696784203952:web:4dc66c1ae13967cdac4b75"
+  apiKey: "AIzaSyDE_v02suHKtqedKsuZTgXSEIFkvICa7fk",
+  authDomain: "loginsignupassignment-5862b.firebaseapp.com",
+  projectId: "loginsignupassignment-5862b",
+  storageBucket: "loginsignupassignment-5862b.firebasestorage.app",
+  messagingSenderId: "981525201780",
+  appId: "1:981525201780:web:3f89bc4d6ff1fa7b066221"
 };
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
-// UI Switch
 window.showLogin = function(){
     signupDiv.classList.add("hidden");
     loginDiv.classList.remove("hidden");
@@ -187,7 +195,6 @@ window.showSignup = function(){
     signupDiv.classList.remove("hidden");
 }
 
-// SIGN UP
 signupBtn.onclick = async () => {
     try {
         const userCredential = await createUserWithEmailAndPassword(
@@ -206,17 +213,14 @@ signupBtn.onclick = async () => {
     }
 };
 
-// GOOGLE AUTH
 googleSignUp.onclick = () => signInWithPopup(auth, provider);
 googleLogin.onclick = () => signInWithPopup(auth, provider);
 
-// LOGIN
 loginBtn.onclick = () => {
     signInWithEmailAndPassword(auth, loginEmail.value, loginPassword.value)
     .catch(error => alert(error.message));
 };
 
-// FORGOT PASSWORD
 forgotPassword.onclick = () => {
     if(loginEmail.value === ""){
         alert("Enter your email first.");
@@ -228,10 +232,8 @@ forgotPassword.onclick = () => {
     .catch(error => alert(error.message));
 };
 
-// LOGOUT
 logoutBtn.onclick = () => signOut(auth);
 
-// AUTH STATE LISTENER
 onAuthStateChanged(auth, (user) => {
     if(user){
         signupDiv.classList.add("hidden");
